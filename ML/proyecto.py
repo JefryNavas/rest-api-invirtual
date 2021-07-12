@@ -4,8 +4,7 @@ import pandas as pd
 from sklearn.metrics import pairwise_distances
 from sklearn.cluster import AgglomerativeClustering
 
-def dhc (data): 
-    cluster = input("Ingrese el numero de cluster: ")
+def dhc (data,cluster): 
     hc = AgglomerativeClustering(n_clusters = int(cluster), 
                     affinity = 'euclidean', 
                     linkage = 'ward')
@@ -15,7 +14,8 @@ def dhc (data):
 def matrix_distancia(data):
     dist = pairwise_distances(data)
     return dist
-def geocoders (data): 
+def geocoders (data,cluster): 
+    L1 = data
     LAT = []
     LON = []
     L2 = []
@@ -34,8 +34,7 @@ def geocoders (data):
     data = pd.DataFrame(L2)
     data1 = data.transpose()
     dist = matrix_distancia(data1)
-    print(dist)
-    y_hc = dhc(dist)
-    print(y_hc)    
-L1 = ["Avenida Amazonas, Quito","Calle Moromoro, Quito","Avenida Alonso de Angulo, Quito","Avenida Mariana de Jesus, Quito","Avenida Naciones Unidas, Quito","Vicente Rocafuerte Bejarano, Guayaquil"]
-geocoders(L1)
+    y_hc = dhc(dist,cluster)
+    return y_hc   
+
+
