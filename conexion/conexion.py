@@ -5,20 +5,16 @@ from datetime import datetime
 today = date.today()
 
 conexion1 = psycopg2.connect(host="localhost",database="Invirtual_Store",user="postgres",password="123")
-
-direcciones = []
-
-# Conexion con la base en Postgres
 cursor = conexion1.cursor()
 
-# Consulta las palabras kichwa con etiquetas positivas
-cursor.execute(
-    f"SELECT calle_principal from pedido"
-)
-for calle in cursor.fetchall():
-    cal = "".join(calle)
-    if not cal in direcciones:
-        direcciones.append(f'{cal}')
+def getDirecciones():
+    direcciones = []
+    cursor.execute(
+        f"SELECT cod_ped,calle_principal from pedido where fecha_entrega = '{today}'"
+    )
+    for calle in cursor.fetchall():
+        cal = list(calle)
+        if not cal  in direcciones:
+            direcciones.append({'cod_pedido': cal[0],'direccion': f'{cal[1]}, Quito'}) 
+    return direcciones
 
-
-print(direcciones)
