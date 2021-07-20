@@ -10,11 +10,13 @@ cursor = conexion1.cursor()
 def getDirecciones():
     direcciones = []
     cursor.execute(
-        f"SELECT cod_ped,calle_principal from pedido where fecha_entrega = '{today}'"
+        f"SELECT cod_ped,calle_principal from pedido where fecha_entrega = '{today}' and estado = 'Pedido Registrado'"
     )
+    col = []
     for calle in cursor.fetchall():
         cal = list(calle)
-        if not cal  in direcciones:
+        if not cal == col:
             direcciones.append({'cod_pedido': cal[0],'direccion': f'{cal[1]}, Quito'}) 
+        col = cal
     return direcciones
 

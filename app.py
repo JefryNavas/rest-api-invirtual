@@ -23,11 +23,13 @@ def getCluster(cluster):
                 nums.append(num)
             repartidores[k]['Repartidor'] = nums[k]
         return jsonify({'Repartidores': {
+            'estado': True,
             'message': 'PEDIDOS DE HOY',
             'data': repartidores}})
     else:
         return jsonify({'Repartidores': {
-            'message': 'NO HAY PEDIDOS POR HOY'}})
+            'estado': False,
+            'message': 'NO HAY PEDIDOS POR ASIGNAR'}})
 
 
     
