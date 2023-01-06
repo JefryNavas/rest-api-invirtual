@@ -14,6 +14,7 @@ def dhc (data,cluster):
 def matrix_distancia(data):
     dist = pairwise_distances(data)
     return dist
+
 def geocoders (data,cluster): 
     if not data:
         return False

@@ -2,9 +2,7 @@ from flask import Flask, jsonify
 from ML.proyecto import geocoders
 from conexion.conexion import getDirecciones
 app = Flask(__name__)
-
 app.config['JSON_AS_ASCII'] = False
-
 # Get Data Routes
 @app.route('/ml/<int:cluster>')
 def getCluster(cluster):
